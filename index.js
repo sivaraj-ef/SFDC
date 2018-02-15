@@ -36,8 +36,8 @@ function convertToJson(value) {
 function convertSFDX2Metadata(value, process) {
 	spinner.start('Loading..');
 	setTimeout(() => {
-		spinner.color = 'yellow';
-		spinner.text = 'process';
+		spinner.color = 'rainbow';
+		spinner.text = 'Converting SFDX to Metadata format';
 	}, 1000);
 	Promise.coroutine(function*() {
 		var response = yield cmd.run('sfdx force:source:convert -d mdapioutput/ --json');
@@ -56,8 +56,8 @@ function convertSFDX2Metadata(value, process) {
 function cleanGitRepo(value, process) {
 	spinner.start('Loading..');
 	setTimeout(() => {
-		spinner.color = 'yellow';
-		spinner.text = 'process';
+		spinner.color = 'rainbow';
+		spinner.text = 'Cleaning github repository';
 	}, 1000);
 	Promise.coroutine(function*() {
 		var response = yield cmd.run('git reset --hard origin/sub-branch && git fetch --all && git pull --rebase && git prune && git ls-files -i --exclude-from=.gitignore && git stash save --keep-index --include-untracked');
