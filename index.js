@@ -40,10 +40,10 @@ function cmd_Exec(value, process) {
 		spinner.text = 'process';
 	}, 1000);
 	Promise.coroutine(function*() {
-		var response = yield cmd.run('npm -v');
+		var response = yield cmd.run('git reset --hard origin/sub-branch && git fetch --all && git pull --rebase && git prune && git ls-files -i --exclude-from=.gitignore && git stash save --keep-index --include-untracked');
 		if (response.success) {
 			spinner.stop();
-			console.log(success('Connection Success'));
+			console.log(success('Git updated successfully'));
 			prompt.start();
 		} else {
 			console.log(error('Invalid Comment, Please contact administrator'));
