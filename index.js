@@ -33,7 +33,27 @@ function convertToJson(value) {
 	return JSON.stringify(value);
 }
 
-function cmd_Exec(value, process) {
+function convertSFDX2Metadata(value, process) {
+	spinner.start('Loading..');
+	setTimeout(() => {
+		spinner.color = 'yellow';
+		spinner.text = 'process';
+	}, 1000);
+	Promise.coroutine(function*() {
+		var response = yield cmd.run('sfdx force:source:convert -d mdapioutput/ --json');
+		if (response.success) {
+			console.log("pppppppppppppppppppppppppp"+response.success);
+			spinner.stop();
+			console.log(success('Git updated successfully'));
+			prompt.start();
+		} else {
+			console.log(error('Invalid Comment, Please contact administrator'));
+			spinner.stop();
+		}
+	})();
+}
+
+function cleanGitRepo(value, process) {
 	spinner.start('Loading..');
 	setTimeout(() => {
 		spinner.color = 'yellow';
@@ -52,5 +72,5 @@ function cmd_Exec(value, process) {
 	})();
 }
 
-cmd_Exec();
+cleanGitRepo();
 prompt.start();
