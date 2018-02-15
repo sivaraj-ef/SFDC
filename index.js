@@ -36,7 +36,7 @@ function convertToJson(value) {
 function convertSFDX2Metadata(value, process) {
 	spinner.start('Loading..');
 	setTimeout(() => {
-		spinner.color = 'rainbow';
+		spinner.color = 'yellow';
 		spinner.text = 'Converting SFDX to Metadata format';
 	}, 1000);
 	Promise.coroutine(function*() {
@@ -56,7 +56,7 @@ function convertSFDX2Metadata(value, process) {
 function cleanGitRepo(value, process) {
 	spinner.start('Loading..');
 	setTimeout(() => {
-		spinner.color = 'rainbow';
+		spinner.color = 'yellow';
 		spinner.text = 'Cleaning github repository';
 	}, 1000);
 	Promise.coroutine(function*() {
