@@ -32,19 +32,17 @@ function success(value) {
 function convertToJson(value) {
 	return JSON.stringify(value);
 }
-
-function convertSFDX2Metadata(value, process) {
+function deploy(value) {
 	spinner.start('Loading..');
 	setTimeout(() => {
 		spinner.color = 'yellow';
-		spinner.text = 'Converting SFDX to Metadata format';
+		spinner.text = 'Deploy data to server, please wait...!';
 	}, 1000);
 	Promise.coroutine(function*() {
-		var response = yield cmd.run('sfdx force:source:convert -d mdapioutput/ --json');
+		var response = yield cmd.run('npm -v');
 		if (response.success) {
-			console.log("pppppppppppppppppppppppppp"+response.success);
 			spinner.stop();
-			console.log(success('Git updated successfully'));
+			console.log(success('Successfully data '));
 			prompt.start();
 		} else {
 			console.log(error('Invalid Comment, Please contact administrator'));
@@ -53,7 +51,27 @@ function convertSFDX2Metadata(value, process) {
 	})();
 }
 
-function cleanGitRepo(value, process) {
+function convertSFDX2Metadata() {
+	spinner.start('Loading..');
+	setTimeout(() => {
+		spinner.color = 'yellow';
+		spinner.text = 'Converting SFDX to Metadata format';
+	}, 1000);
+	Promise.coroutine(function*() {
+		var response = yield cmd.run('sfdx force:source:convert -d mdapioutput/ --json');
+		if (response.success) {
+			spinner.stop();
+			console.log(success('Git updated successfully'));
+			prompt.start();
+			deploy();
+		} else {
+			console.log(error('Invalid Comment, Please contact administrator'));
+			spinner.stop();
+		}
+	})();
+}
+
+function cleanGitRepo() {
 	spinner.start('Loading..');
 	setTimeout(() => {
 		spinner.color = 'yellow';
