@@ -65,6 +65,7 @@ function cleanGitRepo(value, process) {
 			spinner.stop();
 			console.log(success('Git updated successfully'));
 			prompt.start();
+			convertSFDX2Metadata();
 		} else {
 			console.log(error('Invalid Comment, Please contact administrator'));
 			spinner.stop();
