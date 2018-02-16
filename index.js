@@ -9,7 +9,8 @@ const ora = require('ora');
 const spinner = ora('Loading Data');
 var promisify = require('node-promisify');
 var obj_temp = {};
-
+const MaxBufferExceededError = require('max-buffer-exceeded-error');
+new MaxBufferExceededError('stdout', 10);
 // Configuration
 const config = {
 	login_URL_default: 'https://login.salesforce.com/',
