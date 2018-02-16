@@ -39,7 +39,7 @@ function deploy(value) {
 		spinner.text = 'Deploy data to server, please wait...!';
 	}, 1000);
 	Promise.coroutine(function*() {
-		var response = yield cmd.run('npm -v');
+		var response = yield cmd.run('ant deploy');
 		if (response.success) {
 			spinner.stop();
 			console.log(success('Successfully data '));

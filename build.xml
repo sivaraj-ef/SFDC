@@ -1,4 +1,4 @@
-<project name="Sudipta Deb - Continuous Integration Demo" basedir="." xmlns:sf="antlib:com.salesforce">
+<project name="Salesforce Continues intergration" basedir="." xmlns:sf="antlib:com.salesforce">
     <property file="build.properties"/>
     <property environment="env"/>
 
