@@ -29,7 +29,7 @@ function success(value) {
 	return colors.green(value);
 }
 
-function convertToJson(value) {
+function convertToJson(value) { 
 	return JSON.stringify(value);
 }
 function deploy(value) {
