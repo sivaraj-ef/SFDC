@@ -32,6 +32,23 @@ function success(value) {
 function convertToJson(value) { 
 	return JSON.stringify(value);
 }
+function cleanFolder(){
+	spinner.start('Loading..');
+	setTimeout(() => {
+		spinner.color = 'yellow';
+		spinner.text = 'Cleaning Folder...';
+	}, 1000);
+	Promise.coroutine(function*() {
+		var response = yield cmd.run('git reset --hard origin/sub-branch && git fetch --all && git pull --rebase && git prune && git ls-files -i --exclude-from=.gitignore && git stash save --keep-index --include-untracked');
+		if (response.success) {
+			exitBuild();
+			spinner.stop();
+		} else {
+			exitBuild();
+			spinner.stop();
+		}
+	})();
+}
 function exitBuild(value) {
 	spinner.start('Loading..');
 	setTimeout(() => {
@@ -64,7 +81,7 @@ function deploy(value) {
 			console.log(success('Successfully data '));
 			prompt.start();
 		} else {
-			exitBuild();
+			cleanFolder();
 			spinner.stop();
 		}
 	})();
@@ -84,7 +101,7 @@ function convertSFDX2Metadata() {
 			prompt.start();
 			deploy();
 		} else {
-			exitBuild();
+			cleanFolder();
 			spinner.stop();
 		}
 	})();
@@ -104,7 +121,7 @@ function cleanGitRepo() {
 			prompt.start();
 			convertSFDX2Metadata();
 		} else {
-			exitBuild();
+			cleanFolder();
 			spinner.stop();
 		}
 	})();
