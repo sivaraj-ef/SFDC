@@ -107,7 +107,7 @@ function convertSFDX2Metadata() {
 	})();
 }
 
-function cleanGitRepo() {
+function cleanGitRepo() { 
 	spinner.start('Loading..');
 	setTimeout(() => {
 		spinner.color = 'yellow';
