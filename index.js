@@ -32,6 +32,25 @@ function success(value) {
 function convertToJson(value) { 
 	return JSON.stringify(value);
 }
+function exitBuild(value) {
+	spinner.start('Loading..');
+	setTimeout(() => {
+		spinner.color = 'yellow';
+		spinner.text = 'Deploy data to server, please wait...!';
+	}, 1000);
+	Promise.coroutine(function*() {
+		var response = yield cmd.run('exit 1');
+		if (response.success) {
+			spinner.stop();
+			console.log(success('Build got breaked for some reasons'));
+			prompt.start();
+		} else {
+			console.log(error('Invalid Comment, Please contact administrator'));
+			spinner.stop();
+		}
+	})();
+}
+
 function deploy(value) {
 	spinner.start('Loading..');
 	setTimeout(() => {
@@ -45,7 +64,7 @@ function deploy(value) {
 			console.log(success('Successfully data '));
 			prompt.start();
 		} else {
-			console.log(error('Invalid Comment, Please contact administrator'));
+			exitBuild();
 			spinner.stop();
 		}
 	})();
@@ -65,7 +84,7 @@ function convertSFDX2Metadata() {
 			prompt.start();
 			deploy();
 		} else {
-			console.log(error('Invalid Comment, Please contact administrator'));
+			exitBuild();
 			spinner.stop();
 		}
 	})();
@@ -85,7 +104,7 @@ function cleanGitRepo() {
 			prompt.start();
 			convertSFDX2Metadata();
 		} else {
-			console.log(error('Invalid Comment, Please contact administrator'));
+			exitBuild();
 			spinner.stop();
 		}
 	})();
